@@ -4,8 +4,7 @@ include('includes/navbar.php');
 include("auth_session.php");
 ?>
 
-   
-    <!-- Content Wrapper -->
+ <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
@@ -60,8 +59,8 @@ include("auth_session.php");
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-               
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">Hey, <?php echo $_SESSION['username']; ?>!</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
+				<p>Hey, <?php echo $_SESSION['username']; ?>!</p>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
@@ -92,25 +91,84 @@ include("auth_session.php");
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
-         
-         
 
-          <!-- Content Row -->
-          <div class="row">
 
-            <!-- Content Column -->
-            <div class="col-lg-6 mb-4">
 
-             
-             
 
-             
+<div class="counter">
+<div class="row">
+ <div class="col-md-10 text-left"> 
+	
+    
+           
+			<div class="customer">
+			<p class="counter-count"></p>
+                    <p class="customer-p">Customer</p>
+			
 
-            <div class="col-lg-6 mb-4">
+			
 
-              
+<?php 
+    // Setting up connection with database Geeks 
+    $connection = mysqli_connect("localhost", "root", "",  
+                                                 "loginsystem"); 
+      
+    // Check connection 
+    if (mysqli_connect_errno()) 
+    { 
+        echo "Database connection failed."; 
+    } 
+      
+    // query to fetch Username and Password from 
+    // the table geek 
+    $query = "SELECT * FROM employees"; 
+      
+    // Execute the query and store the result set 
+    $result = mysqli_query($connection, $query); 
+     
+    if ($result) 
+    { 
+        // it return number of rows in the table. 
+        $row = mysqli_num_rows($result); 
+          
+           if ($row) 
+              { 
+		  
+                    echo("Number of row in the table : " . $row); 
+					
+               } 
+        // close the result. 
+		
+        mysqli_free_result($result); 
+		
+    } 
+  
+    // Connection close  
+    mysqli_close($connection); 
+?>
 
-        </div>
+
+</div>
+           </div>
+	
+	
+	
+	
+	
+    </div> 
+    </div>
+	</div>
+  
+</div>
+
+
+	
+
+
+
+
+
+</div>
         <!-- /.container-fluid -->
 
       </div>
@@ -126,8 +184,4 @@ include('includes/scripts.php');
 include('includes/footer.php');
 
 ?>
-
- 
-
-  
 

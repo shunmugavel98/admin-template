@@ -40,8 +40,8 @@
         <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
           <div class="bg-white py-2 collapse-inner rounded">
             <h6 class="collapse-header">Custom Components:</h6>
-            <a class="collapse-item" href="index 2.php">Customers Count</a>
-            <a class="collapse-item" href="index 1.php">Employees</a>
+            <a class="collapse-item" href="index1.php">Count</a>
+            <a class="collapse-item" href="index2.php">Employees</a>
           </div>
         </div>
       </li>

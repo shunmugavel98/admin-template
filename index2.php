@@ -60,8 +60,8 @@ include("auth_session.php");
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="mr-2 d-none d-lg-inline text-gray-600 small">Valerie Luna</span>
-				<p>Hey, <?php echo $_SESSION['username']; ?>!</p>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+				Hey, <?php echo $_SESSION['username']; ?>!</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
@@ -92,31 +92,32 @@ include("auth_session.php");
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
-
-    <script type="text/javascript">
+<script type="text/javascript">
         $(document).ready(function(){
             $('[data-toggle="tooltip"]').tooltip();   
         });
     </script>
+    
 
-<div class="container-fluid text-center">    
-  <div class="row content">
-  <div class="col-md-10 text-left"> 
-    <div class="wrapper">
-        <div class="container-fluid">
-            <div class="row">
+  
+				 <div class="container-fluid">
+				 <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                 <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
                         <h2 class="pull-left">Employees Details</h2>
-                        
+                        <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
                     </div>
+					<div class="card-body">
+              <div class="table-responsive">
+					
                     <?php
                     // Include config file
-                    require  "config.php";
-                    require "create.php";
+                    require_once "db.php";
                     // Attempt select query execution
                     $sql = "SELECT * FROM employees";
-                    if($result = mysqli_query($link, $sql)){
+                    if($result = mysqli_query($con, $sql)){
                         if(mysqli_num_rows($result) > 0){
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
@@ -136,9 +137,9 @@ include("auth_session.php");
                                         echo "<td>" . $row['address'] . "</td>";
                                         echo "<td>" . $row['salary'] . "</td>";
                                         echo "<td>";
-                                            echo "<a href='read.php?id=". $row['id'] ."' title='View Record' target='_self' data-toggle='tooltip'><span class='glyphicon glyphicon-eye-open'></span></a>";
-                                            echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' target='_self' data-toggle='tooltip'><span class='glyphicon glyphicon-pencil'></span></a>";
-                                            echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' target='_self' data-toggle='tooltip'><span class='glyphicon glyphicon-trash'></span></a>";
+                                            echo "<a href='read.php?id=". $row['id'] ."' title='View Record' target='_self' data-toggle='tooltip'><span class='fas fa-search-dollar'></span></a>";
+                                            echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' target='_self' data-toggle='tooltip'><span class='fas fa-edit'></span></a>";
+                                            echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' target='_self' data-toggle='tooltip'><span class='fas fa-trash'></span></a>";
                                         echo "</td>";
                                     echo "</tr>";
                                 }
@@ -150,15 +151,19 @@ include("auth_session.php");
                             echo "<p class='lead'><em>No records were found.</em></p>";
                         }
                     } else{
-                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($link);
+                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
                     }
  
                     // Close connection
-                    mysqli_close($link);
+                    mysqli_close($con);
                     ?>
                 </div>
             </div>        
         </div>
+    </div>
+	  </div>
+    </div>
+ </div>
     </div>
 
 
