@@ -1,3 +1,5 @@
+<?php require_once 'db.php'; ?>
+
 <?php
 include('includes/header.php');
 include('includes/navbar.php');
@@ -93,137 +95,54 @@ include("db.php");
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
-<script type="text/javascript">
-        $(document).ready(function(){
-            $('[data-toggle="tooltip"]').tooltip();   
-        });
-    </script>
-    
-
-
-  
-				 <div class="container-fluid">
+ 
+ <div class="container-fluid">
 				 <div class="card shadow mb-4">
             <div class="card-header py-3">
                  <div class="row">
                 <div class="col-md-12">
                     <div class="page-header clearfix">
-                        <h2 class="pull-left">Employees Details</h2>
-                        <a href="create.php" class="btn btn-success pull-right">Add New Employee</a>
+                        <h2 class="pull-left">Customers Details</h2>
+                        <a href="create1.php" class="btn btn-success pull-right">Add New Customer</a>
                     </div>
 					<div class="card-body">
               <div class="table-responsive">
-						<?php	 
-$record_per_page = 5;
-$page = '';
-if(isset($_GET["page"]))
-{
- $page = $_GET["page"];
-}
-else
-{
- $page = 1;
-}
-
-$start_from = ($page-1)*$record_per_page;
-
-$query = "SELECT * FROM employees order by student_id DESC LIMIT $start_from, $record_per_page";
-$result = mysqli_query($con, $query);
-					
-?>
-					
-                    <?php
-                    // Include config file
-                   
-                    // Attempt select query execution
-                    $sql = "SELECT * FROM employees";
-                    if($result = mysqli_query($con, $sql)){
-                        if(mysqli_num_rows($result) > 0){
-                            echo "<table class='table table-bordered table-striped'>";
-                                echo "<thead>";
-                                    echo "<tr>";
-                                        echo "<th>#</th>";
-                                        echo "<th>Name</th>";
-                                        echo "<th>Address</th>";
-                                        echo "<th>Salary</th>";
-                                        echo "<th>Action</th>";
-                                    echo "</tr>";
-                                echo "</thead>";
-                                echo "<tbody>";
-                                while($row = mysqli_fetch_array($result)){
-                                    echo "<tr>";
-                                        echo "<td>" . $row['id'] . "</td>";
-                                        echo "<td>" . $row['name'] . "</td>";
-                                        echo "<td>" . $row['address'] . "</td>";
-                                        echo "<td>" . $row['salary'] . "</td>";
-                                        echo "<td>";
-                                            echo "<a href='read.php?id=". $row['id'] ."' title='View Record' target='_self' data-toggle='tooltip'><span class='fas fa-search-dollar'></span></a>";
-                                            echo "<a href='update.php?id=". $row['id'] ."' title='Update Record' target='_self' data-toggle='tooltip'><span class='fas fa-edit'></span></a>";
-                                            echo "<a href='delete.php?id=". $row['id'] ."' title='Delete Record' target='_self' data-toggle='tooltip'><span class='fas fa-trash'></span></a>";
-                                        echo "</td>";
-                                    echo "</tr>";
-                                }
-                                echo "</tbody>";                            
-                            echo "</table>";
-                            // Free result set
-                            mysqli_free_result($result);
-                        } else{
-                            echo "<p class='lead'><em>No records were found.</em></p>";
-                        }
-                    } else{
-                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
-                    }
+			   <table class='table table-bordered table-striped'>
+    <!--<table border="1" cellspacing="0" cellpadding="0">-->
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Age</th>
+                <th>Contact</th>
+				<th>Gender</th>
+                <th>Option</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $sql = "SELECT * FROM customers WHERE active = 1";
+            $result = $con->query($sql);
  
-                    // Close connection
-                    mysqli_close($con);
-					
-					
-					
-					
-					
-					
-    
-    
-					
-                    ?>
-	
-				
+            if($result->num_rows > 0) {
+                while($row = $result->fetch_assoc()) {
+                    echo "<tr>
+                        <td>".$row['fname']." ".$row['lname']."</td>
+                        <td>".$row['age']."</td>
+                        <td>".$row['contact']."</td>
+						 <td>".$row['gender']."</td>
+                        <td>
+                            <a href='delete1.php?id=".$row['id']."'><button type='button'>Remove</button></a>
+                        </td>
+                    </tr>";
+                }
+            } else {
+                echo "<tr><td colspan='5'><center>No Data Avaliable</center></td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
 
- <?php
-    $page_query = "SELECT * FROM employees ORDER BY student_id DESC";
-    $page_result = mysqli_query($con, $page_query);
-    $total_records = mysqli_num_rows($page_result);
-    $total_pages = ceil($total_records/$record_per_page);
-    $start_loop = $page;
-    $difference = $total_pages - $page;
-    if($difference <= 5)
-    {
-     $start_loop = $total_pages - 5;
-    }
-    $end_loop = $start_loop + 4;
-    if($page > 1)
-    {
-     echo "<a href='index2.php?page=1'>First</a>";
-     echo "<a href='index2.php?page=".($page - 1)."'><<</a>";
-    }
-    for($i=$start_loop; $i<=$end_loop; $i++)
-    {     
-     echo "<a href='index2.php?page=".$i."'>".$i."</a>";
-    }
-    if($page <= $end_loop)
-    {
-     echo "<a href='index2.php?page=".($page + 1)."'>>></a>";
-     echo "<a href='index2.php?page=".$total_pages."'>Last</a>";
-    }
-    ?>
-					
-					
-				
 	
-    
-    
-				
-				
                 </div>
             </div>        
         </div>
@@ -262,3 +181,4 @@ include('includes/scripts.php');
 include('includes/footer.php');
 
 ?>
+

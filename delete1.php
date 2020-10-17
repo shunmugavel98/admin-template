@@ -91,20 +91,14 @@ include("auth_session.php");
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
-
-
-
-
 <?php
 require_once("db.php");
-$sql = "DELETE FROM employees WHERE id='" . $_GET["id"] . "'";
+$sql = "DELETE FROM customers WHERE id='" . $_GET["id"] . "'";
 mysqli_query($con,$sql);
 //header("Location:index3.php");
-echo "<script>location.href='index2.php'; </script>";
+echo "<script>location.href='index4.php'; </script>";
 exit;
 ?>
-
-
 </div>
         <!-- /.container-fluid -->
 

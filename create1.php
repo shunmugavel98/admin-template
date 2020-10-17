@@ -1,10 +1,14 @@
+<?php require_once 'db.php'; ?>
+
 <?php
 include('includes/header.php');
 include('includes/navbar.php');
 include("auth_session.php");
+include("db.php");
 ?>
 
- <!-- Content Wrapper -->
+   
+    <!-- Content Wrapper -->
     <div id="content-wrapper" class="d-flex flex-column">
 
       <!-- Main Content -->
@@ -59,8 +63,8 @@ include("auth_session.php");
             <!-- Nav Item - User Information -->
             <li class="nav-item dropdown no-arrow">
               <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                
-				<span class="mr-2 d-none d-lg-inline text-gray-600 small">Hey, <?php echo $_SESSION['username']; ?>!</span>
+                <span class="mr-2 d-none d-lg-inline text-gray-600 small">
+				Hey, <?php echo $_SESSION['username']; ?>!</span>
                 <img class="img-profile rounded-circle" src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
               </a>
               <!-- Dropdown - User Information -->
@@ -91,21 +95,80 @@ include("auth_session.php");
             <a href="#" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Generate Report</a>
           </div>
 
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-8">
+                    <div class="page-header">
+                        <h2>Create Record</h2>
+                    </div>
+ 
+
+    <form action="action_create1.php" method="post">
+        <table cellspacing="0" cellpadding="0">
+            <div class="form-group">
+			<tr>
+                <th>First Name</th>
+                <td><input type="text" name="fname" class="form-control" placeholder="First Name" /></td>
+            </tr>     
+			</div>
+			<div class="form-group">
+            <tr>
+                <th>Last Name</th>
+                <td><input type="text" name="lname" class="form-control" placeholder="Last Name" /></td>
+            </tr>
+			</div>
+            <div class="form-group">
+			<tr>
+                <th>Age</th>
+                <td><input type="text" name="age" class="form-control" placeholder="Age" /></td>
+            </tr>
+			</div>
+            <div class="form-group">
+			<tr>
+                <th>Contact</th>
+                <td><input type="text" name="contact" class="form-control" placeholder="Contact" /></td>
+            </tr>
+			</div>
+			<div class="form-group">
+			<tr>
+                <th>Gender</th>
+				<td><input type="radio" name="gender" value="male">Male</td>
+                <td><input type="radio" name="gender" value="female">Female</td>
+                </tr>
+			</div>
+            <tr>
+                <td><button type="submit">Save</button></td>
+                <td><a href="index3.php"><button type="button">Back</button></a></td>
+            </tr>
+        </table>
+    </form>
+ 
+
+ 
+	
+                </div>
+            </div>        
+        </div>
+    </div>
+	  </div>
+    </div>
+ </div>
+    </div>
+	
+	
+	
 
 
 
-
-<?php
-require_once("db.php");
-$sql = "DELETE FROM employees WHERE id='" . $_GET["id"] . "'";
-mysqli_query($con,$sql);
-//header("Location:index3.php");
-echo "<script>location.href='index2.php'; </script>";
-exit;
-?>
+	
+	
+	
+	
+	
 
 
-</div>
+
+        </div>
         <!-- /.container-fluid -->
 
       </div>

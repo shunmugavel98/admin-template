@@ -42,6 +42,7 @@
             <h6 class="collapse-header">Custom Components:</h6>
             <a class="collapse-item" href="index1.php">Count</a>
             <a class="collapse-item" href="index2.php">Employees</a>
+			 <a class="collapse-item" href="index3.php">customers</a>
           </div>
         </div>
       </li>
