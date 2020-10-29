@@ -114,8 +114,7 @@ include("db.php");
 					<div class="card-body">
               <div class="table-responsive">
 						<?php	 
-$record_per_page = 5;
-$page = '';
+
 if(isset($_GET["page"]))
 {
  $page = $_GET["page"];
@@ -124,10 +123,10 @@ else
 {
  $page = 1;
 }
+$record_per_page = 5;
+$start_from = ($page-1)*5;
 
-$start_from = ($page-1)*$record_per_page;
-
-$query = "SELECT * FROM employees order by student_id DESC LIMIT $start_from, $record_per_page";
+$query = "SELECT * FROM employees LIMIT $start_from, $record_per_page";
 $result = mysqli_query($con, $query);
 					
 ?>
@@ -136,9 +135,9 @@ $result = mysqli_query($con, $query);
                     // Include config file
                    
                     // Attempt select query execution
-                    $sql = "SELECT * FROM employees";
-                    if($result = mysqli_query($con, $sql)){
-                        if(mysqli_num_rows($result) > 0){
+                    
+					
+                      
                             echo "<table class='table table-bordered table-striped'>";
                                 echo "<thead>";
                                     echo "<tr>";
@@ -166,54 +165,40 @@ $result = mysqli_query($con, $query);
                                 echo "</tbody>";                            
                             echo "</table>";
                             // Free result set
-                            mysqli_free_result($result);
-                        } else{
-                            echo "<p class='lead'><em>No records were found.</em></p>";
-                        }
-                    } else{
-                        echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
-                    }
+                            //mysqli_free_result($result);
+                      
+						
  
                     // Close connection
-                    mysqli_close($con);
+                    //mysqli_close($con);
 					
 					
 					
 					
+					?>
 					
 					
     
     
 					
-                    ?>
-	
-				
-
- <?php
-    $page_query = "SELECT * FROM employees ORDER BY student_id DESC";
+             <?php
+    $page_query = "SELECT * FROM employees";
     $page_result = mysqli_query($con, $page_query);
     $total_records = mysqli_num_rows($page_result);
     $total_pages = ceil($total_records/$record_per_page);
-    $start_loop = $page;
-    $difference = $total_pages - $page;
-    if($difference <= 5)
-    {
-     $start_loop = $total_pages - 5;
-    }
-    $end_loop = $start_loop + 4;
+   
     if($page > 1)
     {
-     echo "<a href='index2.php?page=1'>First</a>";
-     echo "<a href='index2.php?page=".($page - 1)."'><<</a>";
+     echo "<a href='index2.php?page=".($page - 1)."'>prev</a>";
     }
-    for($i=$start_loop; $i<=$end_loop; $i++)
+   for($i=1; $i<$total_pages; $i++)
     {     
      echo "<a href='index2.php?page=".$i."'>".$i."</a>";
     }
-    if($page <= $end_loop)
+    if($i>$page)
     {
-     echo "<a href='index2.php?page=".($page + 1)."'>>></a>";
-     echo "<a href='index2.php?page=".$total_pages."'>Last</a>";
+     echo "<a href='index2.php?page=".($page + 1)."'>Next</a>";
+    
     }
     ?>
 					
